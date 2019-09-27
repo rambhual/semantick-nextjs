@@ -16,12 +16,10 @@ function Layout({ children }) {
           rel="stylesheet"
           href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css"
         />
-        <title>ReactReserve</title>
+        <title>React Reserve</title>
       </Head>
       <Header />
-      <Container text style={{ paddingTop: "1em" }}>
-        {children}
-      </Container>
+      <Container style={{ margin: "2rem 5rem" }}>{children}</Container>
     </>
   );
 }

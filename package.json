@@ -12,7 +12,7 @@
     "Nextjs",
     "Reactjs"
   ],
-  "author": "",
+  "author": "Ramprit Sahani",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.0",
