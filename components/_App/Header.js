@@ -1,8 +1,13 @@
 import React from "react";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 
 import { Menu, Button } from "semantic-ui-react";
 import Link from "next/link";
+import NProgress from "nprogress";
+
+Router.onRouteChangeStart = () => NProgress.start();
+Router.onRouteChangeComplete = () => NProgress.done();
+Router.onRouteChangeError = () => NProgress.done();
 
 function Header() {
   const router = useRouter();
