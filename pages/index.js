@@ -1,15 +1,16 @@
 import React from "react";
 import axios from "axios";
+import baseUrl from "../utils/baseUrl";
+import ProductList from "../components/Index/ProductList";
 
 function Home({ products }) {
-  console.log("Initial Props", products);
-
-  return <>home</>;
+  return <ProductList products={products}></ProductList>;
 }
 
 Home.getInitialProps = async () => {
-  const url = "http://localhost:3000/api/products";
+  const url = `${baseUrl}/api/products`;
   const result = await axios.get(url);
   return { products: result.data };
 };
 export default Home;
+//
