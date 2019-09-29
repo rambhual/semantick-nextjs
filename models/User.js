@@ -1,22 +1,11 @@
-import mongoose from "mongoose";
-const { String } = mongoose.Schema.Types;
+import mongoose, { mongo } from "mongoose";
 
+const { String } = mongoose.Schema.Types;
 const UserSchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
-      required: true
-    },
-    email: {
-      type: String,
-      required: true,
-      unique: true
-    },
-    password: {
-      type: String,
-      required: true,
-      select: false
-    },
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true, select: false },
     role: {
       type: String,
       required: true,

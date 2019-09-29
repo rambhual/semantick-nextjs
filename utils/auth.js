@@ -1,4 +1,6 @@
-function Auth() {
-  return <div>Authentication</div>;
+import cookies from "js-cookie";
+import Router from "next/router";
+export function handleLogin(token) {
+  cookies.set("token", token);
+  Router.push("/account");
 }
-export default Auth;

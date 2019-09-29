@@ -9,7 +9,7 @@ function ProductAttributes({ description, name, _id }) {
   const router = useRouter();
 
   const [modal, setModal] = useState(false);
-  
+
   async function handleDelete() {
     const url = `${baseUrl}/api/product`;
     const payload = { params: { _id } };
@@ -18,7 +18,9 @@ function ProductAttributes({ description, name, _id }) {
   }
   return (
     <>
-      <Header as="h3">About this product</Header>
+      <Header as="h3" color="blue">
+        About this product
+      </Header>
       <p>{description}</p>
       <Button
         icon="trash alternate outline"

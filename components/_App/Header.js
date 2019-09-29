@@ -1,7 +1,7 @@
 import React from "react";
 import Router, { useRouter } from "next/router";
 
-import { Menu, Button } from "semantic-ui-react";
+import { Menu, Button, Message } from "semantic-ui-react";
 import Link from "next/link";
 import NProgress from "nprogress";
 
@@ -16,6 +16,7 @@ function Header() {
   };
 
   const [user, setUser] = React.useState(false);
+
   return (
     <>
       <Menu

@@ -4,10 +4,10 @@ import ProductSummary from "../components/Product/ProductSummary";
 import ProductAttributes from "../components/Product/ProductAttributes";
 function Product({ product }) {
   return (
-    <>
+    <div style={{ margin: "2rem 7rem" }}>
       <ProductSummary {...product} />
       <ProductAttributes {...product} />
-    </>
+    </div>
   );
 }
 Product.getInitialProps = async ({ query: { _id } }) => {
