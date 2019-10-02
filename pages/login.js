@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { handleLogin } from "../utils/auth";
 import baseUrl from "../utils/baseUrl";
 import Link from "next/link";
 import catchError from "../utils/catchErrors";
@@ -22,13 +23,14 @@ function Login() {
     setUser(preState => ({ ...preState, [name]: value }));
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     try {
       setLoading(true);
       const url = `${baseUrl}/api/login`;
       const payload = { ...user };
-      await axios.post(url,payload)
+      const res = await axios.post(url, payload);
+      handleLogin(res.data);
     } catch (error) {
       catchError(error, setError);
     } finally {
