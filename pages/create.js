@@ -6,7 +6,6 @@ import catchError from "../utils/catchErrors";
 import {
   Form,
   Button,
-  Header,
   Message,
   TextArea,
   Image,
@@ -140,6 +139,7 @@ function CreateProduct() {
 }
 
 export default CreateProduct;
+
 async function imageUpload(product) {
   const data = new FormData();
   data.append("file", product.media);

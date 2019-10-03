@@ -1,8 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import axios from "axios";
-import isEmail from "validator/lib/isEmail";
-import isLength from "validator/lib/isLength";
 import baseUrl from "../utils/baseUrl";
 import catchError from "../utils/catchErrors";
 import { handleLogin } from "../utils/auth";
@@ -29,8 +27,6 @@ function Signup() {
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-
-      
       setLoading(true);
       const url = `${baseUrl}/api/signup`;
       const { name, email, password } = user;

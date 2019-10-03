@@ -14,10 +14,12 @@ function Login() {
   const [disabled, setDisabled] = React.useState(true);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
+
   React.useEffect(() => {
     const isUser = Object.values(user).every(el => Boolean(el));
     isUser ? setDisabled(false) : setDisabled(true);
   }, [user]);
+
   function handleChange(event) {
     const { name, value } = event.target;
     setUser(preState => ({ ...preState, [name]: value }));
@@ -29,8 +31,8 @@ function Login() {
       setLoading(true);
       const url = `${baseUrl}/api/login`;
       const payload = { ...user };
-      const res = await axios.post(url, payload);
-      handleLogin(res.data);
+      const response = await axios.post(url, payload);
+      handleLogin(response.data);
     } catch (error) {
       catchError(error, setError);
     } finally {
@@ -43,7 +45,7 @@ function Login() {
         attached
         color="teal"
         content="Log in with your email and password!"
-        header="Welcome back!"
+        header="Welcome Back!"
       />
 
       <Form loading={loading} error={Boolean(error)} onSubmit={handleSubmit}>
@@ -78,7 +80,7 @@ function Login() {
             type="submit"
             content="Login"
             color="teal"
-            disabled={disabled}
+            disabled={disabled || loading}
           ></Button>
         </Segment>
       </Form>
