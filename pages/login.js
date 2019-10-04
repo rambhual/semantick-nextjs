@@ -4,7 +4,15 @@ import { handleLogin } from "../utils/auth";
 import baseUrl from "../utils/baseUrl";
 import Link from "next/link";
 import catchError from "../utils/catchErrors";
-import { Segment, Button, Form, Message } from "semantic-ui-react";
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Image,
+  Message,
+  Segment
+} from "semantic-ui-react";
 const INITIAL_USER = {
   email: "",
   password: ""
@@ -41,56 +49,64 @@ function Login() {
   }
   return (
     <>
-      <Message
-        attached
-        color="teal"
-        content="Log in with your email and password!"
-        header="Welcome Back!"
-      />
+      <Grid
+        textAlign="center"
+        style={{ height: "100vh" }}
+        verticalAlign="middle"
+      >
+        <Grid.Column style={{ maxWidth: 450 }}>
+          <Header as="h2">
+            <Image src="/static/logo.svg" />
+          </Header>
+          <Form
+            loading={loading}
+            error={Boolean(error)}
+            onSubmit={handleSubmit}
+          >
+            <Message error header="Oops!" content={`${error}`}></Message>
+            <Segment>
+              <Form.Input
+                fluid
+                name="email"
+                icon="envelope open outline"
+                iconPosition="left"
+                onChange={handleChange}
+                type="email"
+                value={user.email}
+                placeholder="Please enter your email address"
+              />
 
-      <Form loading={loading} error={Boolean(error)} onSubmit={handleSubmit}>
-        <Message error header="Oops!" content={`${error}`}></Message>
-        <Segment>
-          <Form.Input
-            fluid
-            name="email"
-            icon="envelope open outline"
-            iconPosition="left"
-            label="Email"
-            onChange={handleChange}
-            type="email"
-            value={user.email}
-            placeholder="Please enter your email address"
-          />
+              <Form.Input
+                fluid
+                name="password"
+                icon="lock"
+                iconPosition="left"
+                onChange={handleChange}
+                value={user.password}
+                type="password"
+                placeholder="Please enter your password"
+              />
 
-          <Form.Input
-            fluid
-            name="password"
-            icon="lock"
-            iconPosition="left"
-            label="Password"
-            onChange={handleChange}
-            value={user.password}
-            type="password"
-            placeholder="Please enter your password"
-          />
+              <Button
+                color="teal"
+                fluid
+                size="large"
+                type="submit"
+                content="Login"
+                disabled={disabled || loading}
+              ></Button>
+            </Segment>
+          </Form>
 
-          <Button
-            icon="signup"
-            type="submit"
-            content="Login"
-            color="teal"
-            disabled={disabled || loading}
-          ></Button>
-        </Segment>
-      </Form>
-      <Message attached="bottom" warning>
-        New user ? {"  "}
-        <Link href="/signup">
-          <a>Create new</a>
-        </Link>{" "}
-        instead
-      </Message>
+          <Message attached="bottom" warning>
+            New user ? {"  "}
+            <Link href="/signup">
+              <a>Create new</a>
+            </Link>{" "}
+            instead
+          </Message>
+        </Grid.Column>
+      </Grid>
     </>
   );
 }

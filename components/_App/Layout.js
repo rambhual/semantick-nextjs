@@ -19,7 +19,7 @@ function Layout({ children, user }) {
         <title>React Reserve</title>
       </Head>
       <Header user={user} />
-      <Container style={{ margin: "2rem 5rem" }}>{children}</Container>
+      <Container style={{ marginTop: "7em" }}>{children}</Container>
     </>
   );
 }

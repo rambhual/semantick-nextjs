@@ -1,7 +1,6 @@
 import React from "react";
 import Router, { useRouter } from "next/router";
-
-import { Menu, Button, Message } from "semantic-ui-react";
+import { Container, Button, Dropdown, Image, Menu } from "semantic-ui-react";
 import Link from "next/link";
 import NProgress from "nprogress";
 
@@ -9,66 +8,59 @@ Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
 Router.onRouteChangeError = () => NProgress.done();
 
-function Header({ user }) {
-  console.log(user);
-  
+function Navigation({ user }) {
   const router = useRouter();
-  const isActive = route => {
-    return route == router.pathname;
-  };
 
   return (
     <>
-      <Menu
-        fluid
-        id="menu"
-        inverted
-        borderless
-        style={{ borderRadius: 0, minHeight: "4em" }}
-      >
-        <Link href="/">
-          <Menu.Item
-            style={{ fontSize: "1.4em" }}
-            header
-            active={isActive("/")}
-          >
+      <Menu fixed="top" inverted borderless>
+        <Container>
+          <Menu.Item as="a">
+            <Image
+              size="mini"
+              src="/static/logo.svg"
+              style={{ marginRight: "1.5em" }}
+            />
             Dhanai Fruits Mart
           </Menu.Item>
-        </Link>
-
-        <Menu.Menu position="right">
+          <Link href="/">
+            <Menu.Item as="a">Home</Menu.Item>
+          </Link>
+          <Dropdown item simple text="Action">
+            <Dropdown.Menu>
+              <Link href="/create">
+                <Dropdown.Item>Create Product</Dropdown.Item>
+              </Link>
+              <Link href="/cart">
+                <Dropdown.Item>Cart</Dropdown.Item>
+              </Link>
+            </Dropdown.Menu>
+          </Dropdown>
           {user ? (
             <>
-              <Link href="/cart">
-                <Menu.Item name="Cart" active={isActive("/cart")} />
-              </Link>
-              <Link href="/create">
-                <Menu.Item name="Create" active={isActive("/create")} />
-              </Link>
-              <Link href="/account">
-                <Menu.Item name="Account" active={isActive("/account")} />
-              </Link>
-
+              <Menu.Item position="right" as="a">
+                Welcome: {user.email}
+              </Menu.Item>
               <Menu.Item>
-                <Button as="a" size="tiny">
-                  Log out
-                </Button>
+                <Button icon="sign out alternate" />
               </Menu.Item>
             </>
           ) : (
             <>
-              <Link href="/login">
-                <Menu.Item name="Login" active={isActive("/login")} />
-              </Link>
               <Link href="/signup">
-                <Menu.Item name="Sign up" active={isActive("/signup")} />
+                <Menu.Item as="a" position="right">
+                  Register
+                </Menu.Item>
+              </Link>
+              <Link href="/login">
+                <Menu.Item as="a">Login</Menu.Item>
               </Link>
             </>
           )}
-        </Menu.Menu>
+        </Container>
       </Menu>
     </>
   );
 }
 
-export default Header;
+export default Navigation;
