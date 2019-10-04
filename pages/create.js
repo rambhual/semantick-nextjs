@@ -10,7 +10,8 @@ import {
   TextArea,
   Image,
   Input,
-  Card
+  Segment,
+  Responsive
 } from "semantic-ui-react";
 const INITIAL_PRODUCT = {
   name: "",
@@ -64,11 +65,8 @@ function CreateProduct() {
     }
   }
   return (
-    <Card fluid color="teal">
-      <Card.Content>
-        <Card.Header content="Create new product" />
-      </Card.Content>
-      <Card.Content>
+    <Segment.Group>
+      <Responsive as={Segment}>
         <Form
           loading={loading}
           error={Boolean(error)}
@@ -85,9 +83,10 @@ function CreateProduct() {
             <Form.Field
               control={Input}
               name="name"
+              focus
               label="Name"
               value={product.name}
-              placeholder="enter product name"
+              placeholder="Enter Product Name"
               onChange={handleChange}
             />
             {/* price */}
@@ -96,10 +95,11 @@ function CreateProduct() {
               name="price"
               label="Price"
               min="0.00"
+              focus
               value={product.price}
               step="0.01"
               type="number"
-              placeholder="enter product price"
+              placeholder="Enter Product Price"
               onChange={handleChange}
             />
 
@@ -119,10 +119,11 @@ function CreateProduct() {
           <Form.Field
             width={10}
             control={TextArea}
+            focus
             name="description"
             value={product.description}
             label="Description"
-            placeholder="enter descriptions"
+            placeholder="Enter Descriptions"
             onChange={handleChange}
           />
           <Form.Field
@@ -133,8 +134,8 @@ function CreateProduct() {
             type="submit"
           />
         </Form>
-      </Card.Content>
-    </Card>
+      </Responsive>
+    </Segment.Group>
   );
 }
 

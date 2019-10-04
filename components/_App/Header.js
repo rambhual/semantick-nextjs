@@ -10,7 +10,9 @@ Router.onRouteChangeError = () => NProgress.done();
 
 function Navigation({ user }) {
   const router = useRouter();
-
+  function isActive(route) {
+    return route === router.pathname;
+  }
   return (
     <>
       <Menu fixed="top" inverted borderless>
@@ -24,14 +26,16 @@ function Navigation({ user }) {
             Dhanai Fruits Mart
           </Menu.Item>
           <Link href="/">
-            <Menu.Item as="a">Home</Menu.Item>
+            <Menu.Item as="a" active={isActive("/")}>
+              Home
+            </Menu.Item>
           </Link>
           <Dropdown item simple text="Action">
-            <Dropdown.Menu>
+            <Dropdown.Menu active={isActive("/create")}>
               <Link href="/create">
                 <Dropdown.Item>Create Product</Dropdown.Item>
               </Link>
-              <Link href="/cart">
+              <Link href="/cart" active={isActive("/cart")}>
                 <Dropdown.Item>Cart</Dropdown.Item>
               </Link>
             </Dropdown.Menu>
@@ -42,7 +46,7 @@ function Navigation({ user }) {
                 Welcome: {user.email}
               </Menu.Item>
               <Menu.Item>
-                <Button icon="sign out alternate" />
+                <Button size="tiny" icon="sign out alternate" />
               </Menu.Item>
             </>
           ) : (

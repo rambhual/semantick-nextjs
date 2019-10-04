@@ -2,11 +2,11 @@ import axios from "axios";
 import baseUrl from "../utils/baseUrl";
 import ProductSummary from "../components/Product/ProductSummary";
 import ProductAttributes from "../components/Product/ProductAttributes";
-function Product({ product }) {
+function Product({ product, user }) {
   return (
     <div style={{ margin: "2rem 7rem" }}>
       <ProductSummary {...product} />
-      <ProductAttributes {...product} />
+      <ProductAttributes user={user} {...product} />
     </div>
   );
 }

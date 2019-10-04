@@ -4,7 +4,10 @@ import { useRouter } from "next/router";
 
 import baseUrl from "../../utils/baseUrl";
 import { Header, Button, Modal } from "semantic-ui-react";
-function ProductAttributes({ description, name, _id }) {
+function ProductAttributes({ description, name, _id, user }) {
+  const isRoot = user.role === "root";
+  const isAdmin = user.role === "admin";
+  const isRootOrAdmin = isRoot || isAdmin;
   // create object of router here for navigation to homepage
   const router = useRouter();
 
@@ -22,28 +25,33 @@ function ProductAttributes({ description, name, _id }) {
         About this product
       </Header>
       <p>{description}</p>
-      <Button
-        icon="trash alternate outline"
-        color="red"
-        content="Delete product"
-        onClick={() => setModal(true)}
-      ></Button>
-      <Modal open={modal} dimmer="blurring">
-        <Modal.Header>Confirmation delete</Modal.Header>
-        <Modal.Content>
-          <p>Are you sure want to delete this product {name}</p>
-        </Modal.Content>
-        <Modal.Actions>
-          <Button content="Cancel" onClick={() => setModal(false)}></Button>
+
+      {isRootOrAdmin && (
+        <>
           <Button
-            content="Delete"
-            negative
-            icon="trash"
-            labelPosition="right"
-            onClick={handleDelete}
+            icon="trash alternate outline"
+            color="red"
+            content="Delete product"
+            onClick={() => setModal(true)}
           ></Button>
-        </Modal.Actions>
-      </Modal>
+          <Modal open={modal} dimmer="blurring">
+            <Modal.Header>Confirmation delete</Modal.Header>
+            <Modal.Content>
+              <p>Are you sure want to delete this product {name}</p>
+            </Modal.Content>
+            <Modal.Actions>
+              <Button content="Cancel" onClick={() => setModal(false)}></Button>
+              <Button
+                content="Delete"
+                negative
+                icon="trash"
+                labelPosition="right"
+                onClick={handleDelete}
+              ></Button>
+            </Modal.Actions>
+          </Modal>
+        </>
+      )}
     </>
   );
 }
